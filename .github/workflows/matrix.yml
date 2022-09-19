@@ -29,11 +29,12 @@ jobs:
           if [ $month == "month-jan" ]; then
             echo "jan"
           else
-            echo $check
+            echo $month
           fi
 
   onlyone:
     runs-on: ubuntu-20.04
+    needs: [test]
     steps:
       - name: echo
         run: |
