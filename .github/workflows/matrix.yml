@@ -25,7 +25,8 @@ jobs:
 
       - name: echo
         run: |
-          check=${{ steps.test-output.outputs.${{ matrix.microservices }} }}
+          month=${{ matrix.microservices}};
+          check=${{ steps.test-output.outputs.$month }};
           if [ $check == "month-jan" ]; then
             echo "jan"
           else
