@@ -25,10 +25,11 @@ jobs:
 
       - name: echo
         run: |
-          if [ ${{ steps.test-output.outputs.${{ matrix.microservices }} }} == "month-jan" ]; then
+          check=${{ steps.test-output.outputs.${{ matrix.microservices }}
+          if [ $check == "month-jan" ]; then
             echo "jan"
           else
-            echo "${{ steps.test-output.outputs.${{ matrix.microservices}} }}"
+            echo $check
           fi
 
   onlyone:
