@@ -1,0 +1,35 @@
+name: matrix
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        microservices: [ "jan", "feb", "mar", "apr", "may",
+          "jun", "jul", "aug" ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: output
+        id: test-output
+        shell: bash
+        run: | 
+          echo "::set-output name=month-${{ matrix.microservices }}"::output-${{ matrix.microservices }}
+
+      - name: echo
+        run: |
+          echo "${{ steps.test-output.outputs.month-jan }}"
+          echo "${{ steps.test-output.outputs.month-feb }}"
+          echo "${{ steps.test-output.outputs.month-mar }}"
+          echo "${{ steps.test-output.outputs.month-apr }}"
+          echo "${{ steps.test-output.outputs.month-may }}"
+          echo "${{ steps.test-output.outputs.month-jun }}"
+          echo "${{ steps.test-output.outputs.month-jul }}"
+          echo "${{ steps.test-output.outputs.month-aug }}"
+
