@@ -3,6 +3,7 @@ name: matrix
 on:
   workflow_dispatch:
   pull_request:
+    
 
 jobs:
   test:
@@ -24,12 +25,15 @@ jobs:
 
       - name: echo
         run: |
-          echo "${{ steps.test-output.outputs.month-jan }}"
-          echo "${{ steps.test-output.outputs.month-feb }}"
-          echo "${{ steps.test-output.outputs.month-mar }}"
-          echo "${{ steps.test-output.outputs.month-apr }}"
-          echo "${{ steps.test-output.outputs.month-may }}"
-          echo "${{ steps.test-output.outputs.month-jun }}"
-          echo "${{ steps.test-output.outputs.month-jul }}"
-          echo "${{ steps.test-output.outputs.month-aug }}"
+          if [ ${{ steps.test-output.outputs.${{ matrix.microservices }} }} == "month-jan" ]; then
+            echo "jan"
+          else
+            echo "${{ steps.test-output.outputs.${{ matrix.microservices}} }}"
+          fi
 
+  onlyone:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: echo
+        run: |
+          echo "Please print one time"
