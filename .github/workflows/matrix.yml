@@ -19,7 +19,7 @@ jobs:
         id: test-output
         shell: bash
         run: | 
-          echo "::set-output name=test-name::output-${{ matrix.microservices }}
+          echo "::set-output name=test-name-output::${{ matrix.microservices }}
 
       - name: echo
         run: |
@@ -38,4 +38,4 @@ jobs:
     steps:
       - name: echo
         run: |
-          echo "${{ steps.test-output.outputs.${{ matrix.microservice }} }}"
+          echo "${{ steps.test-output.outputs.test-name-output }}"
