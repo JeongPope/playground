@@ -19,7 +19,7 @@ jobs:
         id: snapshot
         shell: bash
         run: | 
-          echo "test-snapshot-${{ matrix.microservice }}=${{ matrix.microservices }}" >> $GITHUB_OUTPUT
+          echo "test-snapshot-${{ matrix.microservices }}=${{ matrix.microservices }}" >> $GITHUB_OUTPUT
 
   onlyone:
     runs-on: ubuntu-20.04
