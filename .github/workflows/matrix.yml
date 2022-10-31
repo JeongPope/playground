@@ -34,4 +34,5 @@ jobs:
     steps:
       - name: echo
         run: |
-          echo "${{ steps.test-output.outputs.test-name-output }}"
+          echo "${{ steps.test-output.outputs.test-name-jan }}" &&
+          echo "${{ steps.test-output.outputs.test-name-feb }}"
