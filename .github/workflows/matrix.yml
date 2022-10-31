@@ -3,30 +3,27 @@ name: matrix
 on:
   workflow_dispatch:
   pull_request:
-    
 
 jobs:
   test:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        microservices: [ "jan", "feb", "mar", "apr", "may",
-          "jun", "jul", "aug" ]
+        microservices: [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug" ]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: output
-        id: test-output
+        id: test-output-${{ matrix.microservice }}
         shell: bash
         run: | 
-          echo "::set-output name=month-${{ matrix.microservices }}"::output-${{ matrix.microservices }}
+          echo "::set-output name=${{ matrix.microservices }}"::output-${{ matrix.microservices }}
 
       - name: echo
         run: |
-          month=month-${{ matrix.microservices }};
-          if [ $month == "month-jan" ]; then
+          if [[ ${{ matrix.microservice }} == *"jan"* ]]; then
             echo "jan"
           else
             echo $month
@@ -38,4 +35,4 @@ jobs:
     steps:
       - name: echo
         run: |
-          echo "Please print one time"
+          echo "${{ steps.test.outputs.test-output-${{ matrix.microservice }} }}"
