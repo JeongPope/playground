@@ -31,4 +31,4 @@ jobs:
     steps:
       - name: echo
         run: |
-          echo "${{ needs.snapshot.outputs.snapshot }}
+          echo "${{ needs.snapshot.outputs.snapshot }}"
