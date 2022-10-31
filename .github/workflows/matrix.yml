@@ -12,9 +12,6 @@ jobs:
       matrix:
         microservices: [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug" ]
 
-    outputs:
-      ${{ matrix.microservices }}: ${{ steps.snapshot.outputs.test-snapshot }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,12 +20,12 @@ jobs:
         id: snapshot
         shell: bash
         run: | 
-          echo "test-snapshot=${{ matrix.microservices }}" >> $GITHUB_OUTPUT
+          echo "test-snapshot-${{ matrix.microservices }}=${{ matrix.microservices }}" >> $GITHUB_OUTPUT
 
   onlyone:
     runs-on: ubuntu-20.04
-    needs: [test]
+    needs: [snapshot]
     steps:
       - name: echo
         run: |
-          echo "${{ needs.test.outputs.jan }}, ${{ needs.test.outputs.feb }}"
+          echo "${{ needs.snapshot.outputs.test-snapshot-jan }}, ${{ needs.snapshot.outputs.test-snapshot-feb }}"
