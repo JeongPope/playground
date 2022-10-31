@@ -21,10 +21,15 @@ jobs:
         run: | 
           echo "test-snapshot-${{ matrix.microservices }}=${{ matrix.microservices }}" >> $GITHUB_OUTPUT
 
-  onlyone:
-    runs-on: ubuntu-20.04
-    needs: [test]
-    steps:
-      - name: echo
+      - name: output echo
+        shell: bash
         run: |
-          echo "${{ steps.snapshot.outputs.test-snapshot-jan }}, ${{ steps.snapshot.outputs.test-snapshot-feb }}"
+          echo "${{ steps.snapshot.outputs.test-snapshot-jan }}"
+
+  # onlyone:
+  #   runs-on: ubuntu-20.04
+  #   needs: [test]
+  #   steps:
+  #     - name: echo
+  #       run: |
+  #         echo "${{ steps.snapshot.outputs.test-snapshot-jan }}, ${{ steps.snapshot.outputs.test-snapshot-feb }}"
