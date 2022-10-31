@@ -23,7 +23,7 @@ jobs:
 
       - name: echo
         run: |
-          if [[ ${{ matrix.microservice }} == *"jan"* ]]; then
+          if [[ ${{ matrix.microservice }} == "jan" ]]; then
             echo "jan"
           else
             echo $month
