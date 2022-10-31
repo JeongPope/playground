@@ -23,11 +23,7 @@ jobs:
 
       - name: echo
         run: |
-          if [[ ${{ matrix.microservice }} == "jan" ]]; then
-            echo "jan"
-          else
-            echo $month
-          fi
+          echo "${{ steps.test-output.outputs.test-name-output }}"
 
   onlyone:
     runs-on: ubuntu-20.04
