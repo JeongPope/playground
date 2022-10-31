@@ -15,24 +15,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: output
-        id: test-output
+      - name: Create snapshot
+        id: snapshot
         shell: bash
         run: | 
-          echo "::set-output name=test-name-${{ matrix.microservice }}::${{ matrix.microservices }}"
-
-      - name: echo
-        run: |
-          echo "${{ steps.test-output.outputs.test-name-output }}"
+          echo "test-snapshot-${{ matrix.microservice }}::${{ matrix.microservices }}" >> $GITHUB_OUTPUT
 
   onlyone:
     runs-on: ubuntu-20.04
     needs: [test]
-    strategy:
-      matrix:
-        microservices: [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug" ]
     steps:
       - name: echo
         run: |
-          echo "${{ steps.test-output.outputs.test-name-jan }}" &&
-          echo "${{ steps.test-output.outputs.test-name-feb }}"
+          echo "${{ steps.snapshot.outputs.test-snapshot-jan }}, ${{ steps.snapshot.outputs.test-snapshot-feb }}"
