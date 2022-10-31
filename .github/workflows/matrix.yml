@@ -32,7 +32,10 @@ jobs:
   onlyone:
     runs-on: ubuntu-20.04
     needs: [test]
+    strategy:
+      matrix:
+        microservices: [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug" ]
     steps:
       - name: echo
         run: |
-          echo "${{ steps.test.outputs.test-output-${{ matrix.microservice }} }}"
+          echo "${{ steps.test.outputs.test-output-${{ matrix.microservice }} }}"~
