@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: output
-        id: test-output-${{ matrix.microservice }}
+        id: test-output
         shell: bash
         run: | 
-          echo "::set-output name=${{ matrix.microservices }}"::output-${{ matrix.microservices }}
+          echo "::set-output name=test-name::output-${{ matrix.microservices }}
 
       - name: echo
         run: |
@@ -38,4 +38,4 @@ jobs:
     steps:
       - name: echo
         run: |
-          echo "${{ steps.test.outputs.test-output-${{ matrix.microservice }} }}"
+          echo "${{ steps.test-output.outputs.${{ matrix.microservice }} }}"
